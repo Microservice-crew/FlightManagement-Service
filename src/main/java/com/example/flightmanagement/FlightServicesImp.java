@@ -7,30 +7,46 @@ import java.util.List;
 
 @Service
 public class FlightServicesImp implements FlightService{
-
+    @Autowired
+    private FlightRepository flightRepository;
 
     @Override
     public List<Flight> getAllFlights() {
-        return null;
+
+
+        return flightRepository.findAll();
+
     }
 
     @Override
-    public Flight getFlightById(Long id) {
-        return null;
+    public Flight getFlightById(Integer id) {
+        return flightRepository.findById(id).orElse(null);
     }
 
     @Override
     public Flight saveFlight(Flight flight) {
-        return null;
+      return flightRepository.save(flight);
+
     }
 
     @Override
-    public Flight updateFlight(Flight flight) {
-        return null;
+    public Flight updateFlight(Integer id,Flight flight) {
+//update flight
+        Flight existingFlight=flightRepository.findById(id).orElse(null);
+        existingFlight.setFlightNumber(flight.getFlightNumber());
+        existingFlight.setDepartureCity(flight.getDepartureCity());
+        existingFlight.setArrivalCity(flight.getArrivalCity());
+        existingFlight.setDepartureDate(flight.getDepartureDate());
+        existingFlight.setArrivalDate(flight.getArrivalDate());
+        existingFlight.setDepartureTime(flight.getDepartureTime());
+        existingFlight.setArrivalTime(flight.getArrivalTime());
+        return flightRepository.save(existingFlight);
     }
 
     @Override
-    public void deleteFlight(Long id) {
+    public void deleteFlight(Integer id) {
+        //Delete
+        flightRepository.deleteById(id);
 
     }
 }

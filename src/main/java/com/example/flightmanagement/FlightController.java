@@ -21,22 +21,22 @@ public class FlightController {
     //getbyid
 
     @GetMapping(value="/{id}")
-    public Flight getFlightById(Long id){
+    public Flight getFlightById(@PathVariable Integer id){
         return flightServices.getFlightById(id);
     }
     //add
     @PostMapping(value="/add")
-    public ResponseEntity<Flight> saveFlight(Flight flight){
+    public ResponseEntity<Flight> saveFlight(@RequestBody Flight flight){
         return new ResponseEntity<Flight>(flightServices.saveFlight(flight), HttpStatus.CREATED);
     }
     //update
-    @PutMapping (value="/update")
-    public ResponseEntity<Flight> updateFlight(Flight flight){
-        return new ResponseEntity<Flight>(flightServices.updateFlight(flight), HttpStatus.OK);
+    @PutMapping (value="/update/{id}")
+    public ResponseEntity<Flight> updateFlight(@PathVariable Integer id,@RequestBody  Flight flight){
+        return new ResponseEntity<Flight>(flightServices.updateFlight(id,flight), HttpStatus.OK);
     }
     //delete
-    @DeleteMapping( value="/delete")
-    public ResponseEntity<String> deleteFlight(Long id){
+    @DeleteMapping( value="/delete/{id}")
+    public ResponseEntity<String> deleteFlight(@PathVariable Integer id){
         flightServices.deleteFlight(id);
         return new ResponseEntity<String>("Flight deleted", HttpStatus.OK);
     }
