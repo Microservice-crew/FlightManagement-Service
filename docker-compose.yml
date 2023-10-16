@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+
+
+  Candidat:
+    container_name: Flight
+    image: "flight"
+    build: .\Flight
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - "Eureka"
+
+
+  Eureka:
+    container_name: eureka
+    build: .\eureka
+    hostname: serviceregistry
+    ports:
+      - "8761:8761"
+    image: "eureka"
+
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
+
