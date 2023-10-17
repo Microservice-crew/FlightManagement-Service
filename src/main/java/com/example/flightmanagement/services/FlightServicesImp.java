@@ -1,5 +1,7 @@
-package com.example.flightmanagement;
+package com.example.flightmanagement.services;
 
+import com.example.flightmanagement.entities.Flight;
+import com.example.flightmanagement.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +38,14 @@ public class FlightServicesImp implements FlightService{
         existingFlight.setFlightNumber(flight.getFlightNumber());
         existingFlight.setDepartureCity(flight.getDepartureCity());
         existingFlight.setArrivalCity(flight.getArrivalCity());
-        existingFlight.setDepartureDate(flight.getDepartureDate());
-        existingFlight.setArrivalDate(flight.getArrivalDate());
-        existingFlight.setDepartureTime(flight.getDepartureTime());
-        existingFlight.setArrivalTime(flight.getArrivalTime());
+        existingFlight.setDepartureDateTime(flight.getDepartureDateTime());
+        existingFlight.setArrivalDateTime(flight.getArrivalDateTime());
+        existingFlight.setAirline(flight.getAirline());
+
+        existingFlight.setAvailableSeats(flight.getAvailableSeats());
+
+        existingFlight.setTicketPrice(flight.getTicketPrice());
+
         return flightRepository.save(existingFlight);
     }
 

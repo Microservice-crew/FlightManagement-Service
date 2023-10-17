@@ -1,5 +1,7 @@
-package com.example.flightmanagement;
+package com.example.flightmanagement.controller;
 
+import com.example.flightmanagement.services.FlightService;
+import com.example.flightmanagement.entities.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,6 @@
-package com.example.flightmanagement;
+package com.example.flightmanagement.services;
+
+import com.example.flightmanagement.entities.Flight;
 
 import java.util.List;
 
