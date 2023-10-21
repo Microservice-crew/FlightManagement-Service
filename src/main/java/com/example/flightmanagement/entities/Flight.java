@@ -20,7 +20,7 @@ public class Flight implements Serializable {
     private static final long serialVersionUID = 6711457437559348053L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String flightNumber;
     private String departureCity;

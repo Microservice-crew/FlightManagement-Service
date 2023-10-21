@@ -19,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Seat  implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String seatNumber;
     private String seatClass;

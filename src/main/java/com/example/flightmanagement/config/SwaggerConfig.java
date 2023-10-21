@@ -30,13 +30,11 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi productPublicApi() {
         return GroupedOpenApi.builder()
-
-                .group("flight")
-
-                .pathsToMatch("/booking/**","/flight/**","/seat/**")
+                .group("public-api")
+                .pathsToMatch("/booking/**", "/seat/**", "/flights/**")
                 .pathsToExclude("**")
                 .build();
-
     }
+
 
 }

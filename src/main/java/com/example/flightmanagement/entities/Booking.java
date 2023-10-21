@@ -5,13 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,12 +17,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class Booking implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Integer userId; // Reference to the user making the booking
-    @ManyToOne
-    @JoinColumn(name = "flight_id")
-    private Flight flight; // Reference to the booked flight
+    //manytoOne user
+
+    private  String userId;
+
+
+    private Integer flightId; // The id of the flight
     private String seatNumber; // The selected seat number
     private Date bookingTime; // Date and time of the booking
     private String passengerName; // The name of the passenger

@@ -1,6 +1,7 @@
 package com.example.flightmanagement.services;
 
 import com.example.flightmanagement.entities.Booking;
+import com.example.flightmanagement.entities.User;
 import com.example.flightmanagement.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,16 +12,26 @@ import java.util.List;
 public class BookingServiceImp implements BookingService {
     @Autowired
     private BookingRepository bookingRepository;
-
+    @Autowired
+    private userService userService;
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
+    }
+    public User getUserDetails(String userId) {
+        return userService.getUserById(userId);
     }
 
     public Booking getBookingById(Integer id) {
         return bookingRepository.findById(id).orElse(null);
     }
 
-    public Booking createBooking(Booking booking) {
+    public Booking createBooking(Booking booking, String userId, Integer flightId) {
+
+        User user = userService.getUserById(userId);
+        booking.setUserId(user.get_id());
+        booking.setFlightId(flightId);
+//console log
+        System.out.println("user id is "+user.get_id());
         return bookingRepository.save(booking);
     }
 
@@ -28,7 +39,7 @@ public class BookingServiceImp implements BookingService {
      //update booking
         Booking existingBooking=bookingRepository.findById(id).orElse(null);
         existingBooking.setUserId(booking.getUserId());
-        existingBooking.setFlight(booking.getFlight());
+        existingBooking.setFlightId(booking.getFlightId());
         existingBooking.setSeatNumber(booking.getSeatNumber());
         existingBooking.setBookingTime(booking.getBookingTime());
         existingBooking.setPassengerName(booking.getPassengerName());
