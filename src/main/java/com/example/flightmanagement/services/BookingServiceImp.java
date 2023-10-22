@@ -13,7 +13,7 @@ public class BookingServiceImp implements BookingService {
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired
-    private userService userService;
+    private com.example.flightmanagement.feign.userService userService;
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }

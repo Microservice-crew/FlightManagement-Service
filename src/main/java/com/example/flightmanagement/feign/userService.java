@@ -1,4 +1,4 @@
-package com.example.flightmanagement.services;
+package com.example.flightmanagement.feign;
 
 
 import com.example.flightmanagement.entities.User;
