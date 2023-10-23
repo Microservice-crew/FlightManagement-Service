@@ -5,8 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -22,16 +25,18 @@ public class FlightManagementApplication {
 
 
 
-	@Bean
-	public static WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:9000")
-						.allowedMethods("GET", "POST", "PUT", "DELETE")
-						.allowedHeaders("*");
-			}
-		};
+	@Configuration
+	public class CorsConfig {
+		@Bean
+		public CorsConfigurationSource corsConfigurationSource() {
+			CorsConfiguration configuration = new CorsConfiguration();
+			configuration.addAllowedOrigin("http://localhost:3000"); // Replace with your React app's origin
+			configuration.addAllowedMethod("*");
+			configuration.addAllowedHeader("*");
+
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", configuration);
+			return source;
+		}
 	}
 }
